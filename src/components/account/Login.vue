@@ -3,10 +3,10 @@
         <section>
             <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="用户名" prop="uname">
-                    <el-input type="text" v-model="ruleForm2.uname" auto-complete="off"></el-input>
+                    <el-input type="text" v-model="ruleForm2.user_name" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="确认密码" prop="upwd">
-                    <el-input type="password" v-model="ruleForm2.upwd" auto-complete="off"></el-input>
+                    <el-input type="password" v-model="ruleForm2.password" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" @click="submitForm('ruleForm2')">登录</el-button>
@@ -37,17 +37,17 @@ export default {
     
         // 这里的字段要按照接口文档进行修改
         ruleForm2: {
-            pass: "",
-            checkPass: "",
+            password: "",
+            user_name:''
         },
 
       //验证规则
         rules2: {
-            uname: [
+            user_name: [
                 { required: true, message: '请输入用户名', trigger: 'blur' },
                 { min: 1, max: 10, message: '长度在 1 到 10 个字符', trigger: 'blur' }
             ],
-            upwd: [
+            password: [
                 { required: true, message: '请输入密码', trigger: 'blur' },
                 { min: 6, max: 18, message: '长度在 6 到 18 个字符', trigger: 'blur' }
             ],
@@ -64,7 +64,7 @@ export default {
                     callback: () => {
                         // location.href = 'http://127.0.0.1:8080/#/admin';
                         // 登陆成功后跳转到用户要跳转到的页面
-                        this.$router.push({ path : this.$route.query.next || '/admin'})
+                        this.$router.push({ path : this.$route.query.next || '/goodslist'})
 
                         localStorage.setItem('uname', res.data.message.uname)
                     }
