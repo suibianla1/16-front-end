@@ -10,7 +10,7 @@ import Shop from '../components/shop/Shop.vue'
 import GoodsList from '../components/shop/goods/Goods.vue'
 import GoodsDetail from '../components/shop/detail/goodsDetail.vue'
 import Shopcart from '../components/shop/shopcart/Shopcart.vue'
-import Address from '../components/shop/order/Address.vue'
+import Site from '../components/shop/order/Site.vue'
 import Pay from '../components/shop/order/Pay.vue'
 import OrderComplete from '../components/shop/order/OrderComplete.vue'
 
@@ -23,16 +23,17 @@ let goods=[
 ]
 
 let shopcart = [
-    { name: 'shopcart', path: 'shopcart/:id', component: Shopcart }
+    { name: 'shopcart', path: 'shopcart', component: Shopcart }
 ]
 
 let order = [
-  { name: 'adress', path: 'address', component: Address },
-  { name: 'pay', path: 'pay/:id', component: Pay },
+//   { name: 'adress', path: 'address', component: Address },
+    { name: 'site', path: 'site/:ids', component: Site },
   { name: 'orderComplete', path: 'orderComplete', component: OrderComplete },
 ]
 
 let router =  new Router({
+    mode: 'history',
     routes: [
       { path: '/', name: 'shop', component: Shop, children: [...goods, ...order, ...shopcart] },
       { path: '/login', name: 'login', component: Login},

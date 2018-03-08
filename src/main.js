@@ -12,10 +12,16 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/site/css/style.css'
 import './assets/css/style.css'
 
+//导入vuex类库，该类库用于创建全局数据
+import Vuex from 'vuex';
+import storeCart from './store/cart.js';
+
 Vue.config.productionTip = false
 
 
 Vue.use(ElementUI);
+Vue.use(Vuex);
+
 
 //设置默认域名
 axios.defaults.baseURL = domain
@@ -28,11 +34,11 @@ Vue.prototype.$api = api;
 
 //设置默认域名
 
-
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  store: new Vuex.Store(storeCart)
 })

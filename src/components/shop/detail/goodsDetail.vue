@@ -90,7 +90,7 @@
                                         <dd>
                                             <div class="btn-buy" id="buyButton">
                                                 <router-link class="buy" :to="{name:'pay', params: {id:id}}">立即购买</router-link>
-                                                <router-link class="add" :to="{name:'shopcart', params: {id:id}}">加入购物车</router-link>
+                                                <button class="add" @click="addCart">加入购物车</button>
                                             </div>
                                         </dd>
                                     </dl>
@@ -164,6 +164,19 @@ export default {
         //用来获取子组件传送数据额函数
         getCommentData(val){
             this.commentData = val;
+        },
+
+        addCart(){
+            var newNum = this.buyNum + (this.$store.state.cart[this.id] || 0); // 天加的商品数量=新添加的数量 + 原来储存在本地的商品数量
+            this.$store.commit('modify', { id: this.id, buyNum: newNum });
+            this.buyNum = 0;  // 加完之后重置计数框
+            this.$confirm('添加成功，是否到购物车看看？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'info'
+            }).then(() => {
+                this.$router.push({name:'shopcart'})
+            })
         }
        
     },
